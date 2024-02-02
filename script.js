@@ -86,7 +86,7 @@ $(document).ready(function () {
       const humidity = data.main.humidity;
       const windSpeed = data.wind.speed;
   
-      const currentWeatherHTML = `
+      const currentWeather = `
         <h2>${cityName} - ${date}</h2>
         <img src="${icon}" alt="Weather Icon">
         <p>Temperature: ${temperature} °C</p>
@@ -94,7 +94,7 @@ $(document).ready(function () {
         <p>Wind Speed: ${windSpeed} m/s</p>
       `;
   
-      currentWeatherSection.html(currentWeatherHTML);
+      currentWeatherSection.html(currentWeather);
     }
   
     function getWeatherForecast(city) {
@@ -122,7 +122,7 @@ $(document).ready(function () {
         const forecastHumidity = forecastItems[i].main.humidity;
         const forecastWindSpeed = forecastItems[i].wind.speed;
   
-        const forecastHTML = `
+        const forecast = `
           <div class="forecast-item">
             <p>Date: ${forecastDate}</p>
             <img src="${forecastIconUrl}" alt="Weather Icon">
@@ -132,7 +132,7 @@ $(document).ready(function () {
           </div>
         `;
   
-        forecastSection.append(forecastHTML);
+        forecastSection.append(forecast);
       }
     }
 

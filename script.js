@@ -6,9 +6,9 @@ $(document).ready(function () {
   
     const searchForm = $('#search-form');
     const cityInput = $('#city-input');
+    const searchHistorySection = $('#search-history');
     const currentWeatherSection = $('#current-weather');
     const forecastSection = $('#forecast');
-    const searchHistorySection = $('#search-history');
   
     searchForm.submit(function (event) {
       event.preventDefault();
@@ -25,6 +25,43 @@ $(document).ready(function () {
         displaySearchHistory();
       }
     });
+
+    function saveToSearchHistory(city) {
+      let searchHistory = localStorage.getItem(searchHistoryKey);
+  
+      if (!searchHistory) {
+        searchHistory = [];
+      } else {
+        searchHistory = JSON.parse(searchHistory);
+      }
+  
+      searchHistory.unshift(city);
+  
+      if (searchHistory.length > 5) {
+        searchHistory.pop();
+      }
+  
+      localStorage.setItem(searchHistoryKey, JSON.stringify(searchHistory));
+    }
+  
+    function displaySearchHistory() {
+      const searchHistory = JSON.parse(localStorage.getItem(searchHistoryKey));
+  
+      if (searchHistory) {
+        searchHistorySection.empty();
+  
+        for (const city of searchHistory) {
+          const searchHistoryItem = $('<div>').addClass('search-history-item').text(city);
+  
+          searchHistoryItem.click(function () {
+            cityInput.val(city);
+            searchForm.submit();
+          });
+  
+          searchHistorySection.append(searchHistoryItem);
+        }
+      }
+    }
   
     function getCurrentWeather(city) {
       const currentWeatherUrl = `${apiUrl}?q=${city}&appid=${apiKey}&units=metric`;
@@ -44,14 +81,14 @@ $(document).ready(function () {
     function displayCurrentWeather(data) {
       const cityName = data.name;
       const date = new Date(data.dt * 1000).toLocaleDateString();
-      const iconUrl = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+      const icon = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
       const temperature = data.main.temp;
       const humidity = data.main.humidity;
       const windSpeed = data.wind.speed;
   
       const currentWeatherHTML = `
         <h2>${cityName} - ${date}</h2>
-        <img src="${iconUrl}" alt="Weather Icon">
+        <img src="${icon}" alt="Weather Icon">
         <p>Temperature: ${temperature} °C</p>
         <p>Humidity: ${humidity}%</p>
         <p>Wind Speed: ${windSpeed} m/s</p>
@@ -98,42 +135,6 @@ $(document).ready(function () {
         forecastSection.append(forecastHTML);
       }
     }
-  
-    function saveToSearchHistory(city) {
-      let searchHistory = localStorage.getItem(searchHistoryKey);
-  
-      if (!searchHistory) {
-        searchHistory = [];
-      } else {
-        searchHistory = JSON.parse(searchHistory);
-      }
-  
-      searchHistory.unshift(city);
-  
-      if (searchHistory.length > 5) {
-        searchHistory.pop();
-      }
-  
-      localStorage.setItem(searchHistoryKey, JSON.stringify(searchHistory));
-    }
-  
-    function displaySearchHistory() {
-      const searchHistory = JSON.parse(localStorage.getItem(searchHistoryKey));
-  
-      if (searchHistory) {
-        searchHistorySection.empty();
-  
-        for (const city of searchHistory) {
-          const searchHistoryItem = $('<div>').addClass('search-history-item').text(city);
-  
-          searchHistoryItem.click(function () {
-            cityInput.val(city);
-            searchForm.submit();
-          });
-  
-          searchHistorySection.append(searchHistoryItem);
-        }
-      }
-    }
+
   });
   

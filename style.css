@@ -1,0 +1,78 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #052641;
+    color: white;
+    text-align: center;
+    padding: 15px;
+  }
+  
+  main {
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  form {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    margin-right: 10px;
+  }
+  
+  input {
+    flex-grow: 1;
+    padding: 5px;
+  }
+  
+  button {
+    background-color: #4b40e1;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #29228d;
+  }
+  
+  section {
+    margin-bottom: 20px;
+  }
+
+  .search-history-item {
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #b5b5b6;
+    margin-bottom: 5px;
+  }
+  
+  .search-history-item:hover {
+    background-color: #dadadd;
+  }
+    
+  #current-weather {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #forecast {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .forecast-item {
+    flex-basis: calc(20% - 10px); /* 20% width with 10px spacing */
+    padding: 10px;
+    color: #dadadd;
+    font-weight: bold;
+    border: 2px solid #ddd;
+    background-color: #07253d;
+    margin: 10px;
+  }

@@ -21,12 +21,12 @@ $(document).ready(function () {
         getCurrentWeather(city);
         getWeatherForecast(city);
   
-        saveToSearchHistory(city);
+        saveSearchHistory(city);
         displaySearchHistory();
       }
     });
 
-    function saveToSearchHistory(city) {
+    function saveSearchHistory(city) {
       let searchHistory = localStorage.getItem(searchHistoryKey);
   
       if (!searchHistory) {
@@ -37,7 +37,7 @@ $(document).ready(function () {
   
       searchHistory.unshift(city);
   
-      if (searchHistory.length > 5) {
+      if (searchHistory.length > 8) {
         searchHistory.pop();
       }
   

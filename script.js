@@ -1,15 +1,19 @@
 $(document).ready(function () {
-    const apiKey = 'e63425c1ce7d91dc46d8815b61390a26';
+    const apiKey = 'e63425c1ce7d91dc46d8815b61390a26';   // API key for OpenWeatherMap
     const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
     const forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
     const searchHistoryKey = 'weatherSearchHistory';
-  
+    
+    // jQuery selectors for various elements
+
     const searchForm = $('#search-form');
     const cityInput = $('#city-input');
     const searchHistorySection = $('#search-history');
     const currentWeatherSection = $('#current-weather');
     const forecastSection = $('#forecast');
   
+    // Event handler for form submission
+
     searchForm.submit(function (event) {
       event.preventDefault();
       const city = cityInput.val().trim();
@@ -25,6 +29,8 @@ $(document).ready(function () {
         displaySearchHistory();
       }
     });
+
+    // Function to save search history
 
     function saveSearchHistory(city) {
       let searchHistory = localStorage.getItem(searchHistoryKey);
@@ -43,7 +49,9 @@ $(document).ready(function () {
   
       localStorage.setItem(searchHistoryKey, JSON.stringify(searchHistory));
     }
-  
+
+    // Function to display search history
+
     function displaySearchHistory() {
       const searchHistory = JSON.parse(localStorage.getItem(searchHistoryKey));
   
@@ -63,6 +71,8 @@ $(document).ready(function () {
       }
     }
   
+    // Function to get current weather
+
     function getCurrentWeather(city) {
       const currentWeatherUrl = `${apiUrl}?q=${city}&appid=${apiKey}&units=metric`;
   
@@ -78,6 +88,8 @@ $(document).ready(function () {
       });
     }
   
+    // Function to display current weather 
+
     function displayCurrentWeather(data) {
       const cityName = data.name;
       const date = new Date(data.dt * 1000).toLocaleDateString();
@@ -97,6 +109,8 @@ $(document).ready(function () {
       currentWeatherSection.html(currentWeather);
     }
   
+    // Function to get 5-day weather forecast
+
     function getWeatherForecast(city) {
       const forecastUrl = `${forecastApiUrl}?q=${city}&appid=${apiKey}&units=metric`;
   
@@ -111,7 +125,9 @@ $(document).ready(function () {
         }
       });
     }
-  
+
+    // Function to display 5-day weather forecast
+
     function displayWeatherForecast(data) {
       const forecastItems = data.list;
   

@@ -15,7 +15,7 @@ JavaScript file is properly commented.
 
 
 
-* The URL of the deployed application - 
+* The URL of the deployed application - https://gibinmgeorge.github.io/Weather-Dashboard/
 
 * The URL of the GitHub repository - https://github.com/GibinMGeorge/Weather-Dashboard
 
